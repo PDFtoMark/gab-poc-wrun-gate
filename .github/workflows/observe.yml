@@ -1,0 +1,21 @@
+name: observe
+on:
+  workflow_run:
+    workflows: ["Build & Tests"]
+    types: [completed]
+permissions: {}
+jobs:
+  ctx:
+    name: Observe upstream run
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: ctx
+        run: |
+          echo "UP_EVENT=${{ github.event.workflow_run.event }}"
+          echo "UP_HEAD_BRANCH=${{ github.event.workflow_run.head_branch }}"
+          echo "UP_HEAD_REPO=${{ github.event.workflow_run.head_repository.full_name }}"
+          echo "UP_SHA=${{ github.event.workflow_run.head_sha }}"
+          echo "UP_TRIGGER_RUN_ID=${{ github.event.workflow_run.id }}"
