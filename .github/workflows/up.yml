@@ -1,0 +1,10 @@
+name: Build & Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "upstream ok event=${{ github.event_name }} branch=${{ github.ref_name }}"
